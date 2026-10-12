@@ -1,0 +1,185 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    char nome[50], cadastro_nome[50];
+    int opcao, saldo, saque, valor_deposito, digito, transfer, confirma, cpf, nascimento, rg, atual,senha,
+    conta, conta_digitada, senha_digitada, tentativa
+    ;
+    saldo = 0;
+    atual = 2026;
+    tentativa = 0;
+    srand(time(NULL));
+    
+    printf("=====================================================\n");
+    printf("||                                                 ||\n");
+    printf("||                     CADASTRO                    ||\n");
+    printf("||                DIGITE SEUS DADOS                ||\n");
+    printf("||                                                 ||\n");
+    printf("=====================================================\n");
+    printf("DIGITE SEU NOME COMPLETO: ");
+    scanf("%s", cadastro_nome);
+    printf("DIGITE SEU CPF: ");
+    scanf("%d", &cpf);
+    printf("DIGITE O ANO DE NASCIMENTO: ");
+    scanf("%d", &nascimento);
+    printf("DIGITE SEU RG: ");
+    scanf("%d", &rg);
+    printf("DIGITE UMA SENHA DE 4 DIGÍTOS: ");
+    scanf("%d", &senha);
+    nascimento = atual - nascimento;
+    
+    
+    if(nascimento <= 15){
+        printf("\nACESSO NEGADO! IDADE MÍNIMA 16 ANOS");
+        return 0;
+    }else{
+        conta = 1000 + rand() % 9000;
+        printf("\n\n===============================================\n");
+        printf("CADASTRO REALIZADO COM SUCESSO!");
+        printf("\nSua conta é --> %d <--", conta);
+        printf("\n\n===============================================\n");
+        printf("\nPressione ENTER para continuar...");
+        getchar();
+        getchar();
+    }
+    do{
+        system("clear");
+   
+        printf("=====================================================\n");
+        printf("||                                                 ||\n");
+        printf("||                   L O G I N                     ||\n");
+        printf("||                                                 ||\n");
+        printf("=====================================================\n");
+        printf("DIGITE O NÚMERO DA SUA CONTA: ");
+        scanf("%d", &conta_digitada);
+        printf("\nDIGITE SUA SENHA: ");
+        scanf("%d", &senha_digitada);
+        
+         if(senha != senha_digitada || conta != conta_digitada){
+             tentativa++;
+            printf("\nCONTA OU SENHA INCORRETA!");
+            printf("\nTentativa %d de 3", tentativa);
+           
+    
+            
+            if(tentativa >= 3){
+                printf("\nNÚMERO MÁXIMO DE TENTATIVAS ATINGIDO");
+                printf("\nENCERRANDO O SISTEMA...");
+                return 0;
+            }
+             printf("\nPressione ENTER para tentar novamente...");
+            getchar();
+            getchar();
+            
+    }
+        
+    
+    
+    }while(senha != senha_digitada || conta != conta_digitada);
+    
+    printf("\n--> LOGIN REALIZADO COM SUCESSO <--\n");
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+    getchar();
+    
+    
+    do{
+        system("clear");
+        printf("======================================================\n");
+        printf("||                                                  ||\n");
+        printf("||                B A N C O   L E G A L             ||\n");
+        printf("||            Soluções Financeiras Digitas          ||\n");
+        printf("||                BEM     -    VINDO                ||\n");
+        printf("||                                                  ||\n");
+        printf("======================================================\n");
+        printf("\nOlá, %s!\n", cadastro_nome);
+        printf("\nESCOLHA QUAL OPÇÃO DESEJA\n");
+        printf("1 - CONSULTAR SALDO\n");
+        printf("2 - DEPOSITAR\n");
+        printf("3 - SAQUE\n");
+        printf("4 - TRANSFERÊNCIA\n");
+        printf("5 - SAIR\n");
+        printf("\nDIGITE QUAL OPÇÃO DESEJA: ");
+        scanf("%d", &opcao); 
+        
+        system("clear");
+        
+        
+        
+        switch(opcao){
+            case 1:
+            printf("============== SALDO ==============\n");
+            printf("\n O VALOR DO SEU SALDO É DE R$ %d \n", saldo);
+            printf("\n===================================\n");
+            
+            break;
+            
+            case 2:
+            printf("================ DEPÓSITOS ================\n");
+            printf("\nDIGITE O VALOR A SER DEPOSITADO R$: ");
+            scanf("%d", &valor_deposito);
+            printf("\n=========================================\n");
+            saldo = saldo + valor_deposito;
+            break;
+            
+            case 3:
+            printf("=============== SAQUE ==============\n");
+            printf("\nDIGITE O VALOR A SER SACADO R$: ");
+            scanf("%d", &saque);
+            saldo = saldo - saque;
+            printf("Sacando.....");
+            printf("\n===================================\n");
+            break;
+            
+            case  4:
+            printf("============= TRANSFERÊNCIA ==============\n");
+            getchar();
+            printf("\nDIGITE O NOME DE QUEM VAI RECEBER: ");
+            fgets(nome, 50, stdin);
+            printf("DIGITE OS 4 DIGÍTOS DA CONTA: ");
+            scanf("%d", &digito);
+            printf("DIGITE O VALOR A SER ENVIADO: ");
+            scanf("%d", &transfer);
+            printf("\n========== DADOS DE QUEM VAI RECEBER ============");
+            printf("\nNOME: %s", nome);
+            printf("DIGITO: %d \n", digito);
+            printf("VALOR DA TRANSFERÊNCIA R$: %d \n", transfer);
+            printf("\nVOCÊ CONFIRMA A TRANSFERÊNCIA? \n");
+            printf(" 1 - SIM\n");
+            printf(" 2 - NÃO \n" );
+            printf("\nDIGITE A OPÇÃO:");
+            scanf("%d", &confirma);
+            if(confirma != 1 && confirma != 2){
+                printf("----------OPÇÃO INVÁLIDA---------");
+            }
+            
+            if(transfer <= saldo && confirma == 1){
+                saldo = saldo - transfer;
+                printf("\nTRANSFERÊNCIA CONCLUÍDA\n");
+            }else{
+                printf("\nTRANSFERÊNCIA CANCELADA OU SALDO INSUFICIENTE!\n");
+            }
+            break;
+            
+            case 5:
+            printf("SAINDO DO BANCO LEGAL...\n");
+            break;
+            default:
+            printf("!!!!!!!!!!!!!!OPÇÃO INVÁLIDA!!!!!!!!!!!!!\n");
+            
+        }
+        if(opcao != 5){
+        printf("\nPressione ENTER para voltar ao menu...");
+        getchar();
+        getchar();
+        system("clear");
+        }
+            
+    }while(opcao != 5);
+    
+    return 0;
+}
